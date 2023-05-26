@@ -6,6 +6,7 @@
   
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
                label-position="left">
+               <!-- vue2中,ref被视为在父组件的$ref属性上注册子组件, 但vue3中不再使用$ref -->
   
         <div class="title-container">
           <h3 class="title">智能简历解析系统</h3>
@@ -52,10 +53,19 @@
   
   <script>
     import { validLoginUsername, validLoginPassword } from '@/utils/validate'
+    import axios from 'axios'
+import { mapStores } from 'pinia'
+import { useUser } from '../../stores/user'
     // 所有的validate方法都放在utils的validate.js文件里
   
     export default {
       name: 'Login',
+      setup() {
+        
+      },
+      computed:{
+        ...mapStores(useUser)
+      },
       data() {
         const validateUsername = (rule, value, callback) => {
           if (!validLoginUsername(value)) {
@@ -92,25 +102,45 @@
             this.redirect = route.query && route.query.redirect
           },
           immediate: true
+          // 初次绑定就要执行监听函数(类似watcheffect)
         }
       },
       mounted() {
+        // axios.post('/login', {username: "admin", password: "123456"}).then((res)=>{
+        //   console.log(res.data)
+        //   console.log(res)
+        // }).catch((error)=>{
+        //   console.log(error)
+        // })
       },
       methods: {
         handleLogin() {
           this.$refs.loginForm.validate(valid => {
             if (valid) {
               this.loginLoading = true
-              this.$store.dispatch('user/login', this.loginForm).then(() => {
-                this.$router.push({ path: this.redirect || '/' })
+              console.log("向后端发送登录请求")
+              this.userStore.login(this.loginForm).then(()=>{
+                console.log(this.redirect)
+                this.$router.push({ path: this.redirect || '/homepage' })
+                // 
                 this.loginLoading = false
                 this.$message({
                   message: '登录成功',
                   type: 'success'
                 })
-              }).catch(() => {
-                this.loginLoading = false
+              }).catch(()=>{
+                this.loginLoading=false
               })
+              // this.$store.dispatch('user/login', this.loginForm).then(() => {
+              //   this.$router.push({ path: this.redirect || '/' })
+              //   this.loginLoading = false
+              //   this.$message({
+              //     message: '登录成功',
+              //     type: 'success'
+              //   })
+              // }).catch(() => {
+              //   this.loginLoading = false
+              // })
             } else {
               console.log('error submit!!')
               return false

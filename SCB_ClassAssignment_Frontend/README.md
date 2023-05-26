@@ -152,3 +152,24 @@ function doWatch(
 #### sass预处理器
 
 在vue中使用的方式是在style标签属性中指明语言
+
+
+#### webpack
+
+- require.context()获取指定文件夹得特定文件
+  参数
+  - directory: (String)待引入的目录路径, 必须是相对路径
+  - useSubdirectories: (Boolean)是否查询其子目录
+  - regExp: (regular expression)匹配基础文件名的正则表达式
+
+#### pinia
+
+- 在使用useStore()钩子之前, 必须有一个已经实例化好的pinia实例, 组件内使用因为main.js一定在先执行, 因此在组件内useStore()就是开箱即用的; 但是在组件外使用【比如在request.js中拦截请求时】, 就要注意一下执行顺序(其实就是在顶层直接```const store = useStore()```时, 他是外部模块, 比vue构建要靠前, 没有实例)
+- 
+##### Getter
+
+### axios
+
+#### 响应
+
+- data: 服务器响应的数据, 不是
