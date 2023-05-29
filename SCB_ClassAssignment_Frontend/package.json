@@ -12,6 +12,7 @@
     "element-plus": "^2.3.4",
     "js-cookie": "^3.0.5",
     "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.32",
     "sass": "^1.62.1",
     "vue": "^3.2.47",

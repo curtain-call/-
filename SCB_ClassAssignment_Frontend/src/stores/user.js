@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import pinia from ".";
+
 
 // 登录获取token
 import { getToken, setToken, removeToken } from '@/utils/auth'
@@ -24,6 +24,7 @@ export const useUser = defineStore('user', {
     actions: {
         RESET_STATE() {
             this.$reset()
+            
         },
         SET_TOKEN(token) {
             this.token = token
@@ -95,20 +96,11 @@ export const useUser = defineStore('user', {
         },
 
         // user logout
-        logout({ commit, state }) {
-            // return new Promise((resolve, reject) => {
-            //   logout().then(() => {
-            //     removeToken() // must remove token first
-            //     resetRouter()
-            //     commit('RESET_STATE')
-            //     resolve()
-            //   }).catch(error => {
-            //     reject(error)
-            //   })
-            // })
+        logout() {
             removeToken() // must remove token first
             resetRouter()
-            commit('RESET_STATE')
+            // commit('RESET_STATE')
+            this.RESET_STATE()
         },
 
         // remove token

@@ -173,3 +173,10 @@ function doWatch(
 #### 响应
 
 - data: 服务器响应的数据, 不是
+
+### Vue router
+
+最重要的两个接口: 
+- this.$route 代表当前页面下的路由
+- this.$router 代表整个router, 在这里实时更改一些配置
+- 如果使用组合式API, 使用userouter()和userRoute()钩子
