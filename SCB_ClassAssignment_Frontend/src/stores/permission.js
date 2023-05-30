@@ -1,4 +1,5 @@
 import { asyncRoutes, constantRoutes } from '../router/index'
+import { defineStore } from 'pinia'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -34,39 +35,33 @@ export function filterAsyncRoutes(routes, roles) {
   return res
 }
 
-const state = {
-  routes: [],
-  addRoutes: []
-}
-
-const mutations = {
-  SET_ROUTES: (state, routes) => {
-    state.addRoutes = routes
-    state.routes = constantRoutes.concat(routes)
-  }
-}
-
-const actions = {
-  generateRoutes({ commit }, roles) {
-    return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
+export const usePermissions = defineStore('permission', {
+  state: () => ({
+    routes: [],
+    addRoutes: []
+  }),
+  getters: {},
+  actions: {
+    SET_ROUTES(routes) {
+      this.addRoutes = routes
+      this.routes = constantRoutes.concat(routes)
+    },
+    generateRoutes(roles) {
+      return new Promise(resolve => {
+        let accessedRoutes
+        if (roles.includes('admin')) {
+          accessedRoutes = asyncRoutes || []
+        } else {
+          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+          // console.log("normal: " + JSON.stringify(accessedRoutes))
+          // console.log("普通用户权限长度: " + accessedRoutes.length)
+        }
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-        // console.log("normal: " + JSON.stringify(accessedRoutes))
-        // console.log("普通用户权限长度: " + accessedRoutes.length)
-      }
-      accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
-    })
+        // commit('SET_ROUTES', accessedRoutes)
+        this.SET_ROUTES(accessedRoutes)
+        resolve(accessedRoutes)
+      })
+    }
   }
-}
+})
 
-export default {
-  namespaced: true,
-  state,
-  mutations,
-  actions
-}

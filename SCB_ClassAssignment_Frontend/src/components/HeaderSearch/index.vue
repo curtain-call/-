@@ -22,6 +22,8 @@
 // make search results more in line with expectations
 import Fuse from 'fuse.js'
 import path from 'path'
+import { mapState } from 'pinia'
+import {usePermissions} from '../../stores/permission'
 
 export default {
   name: 'HeaderSearch',
@@ -35,8 +37,11 @@ export default {
     }
   },
   computed: {
+    ...mapState(usePermissions, {
+      permission_routes: store => store.routes
+    }),
     routes() {
-      return this.$store.getters.permission_routes
+      return this.permission_routes
     }
   },
   watch: {

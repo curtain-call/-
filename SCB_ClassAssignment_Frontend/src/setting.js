@@ -1,5 +1,5 @@
 
-module.exports = {
+const settings = {
     title: '闻人牛子智能简历系统',
     /**
      * @type {boolean} true | false
@@ -13,3 +13,5 @@ module.exports = {
      */
     sidebarLogo: false
 }
+
+export default settings

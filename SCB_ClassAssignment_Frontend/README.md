@@ -180,3 +180,7 @@ function doWatch(
 - this.$route 代表当前页面下的路由
 - this.$router 代表整个router, 在这里实时更改一些配置
 - 如果使用组合式API, 使用userouter()和userRoute()钩子
+
+#### router guard 触发顺序
+
+to be Continue

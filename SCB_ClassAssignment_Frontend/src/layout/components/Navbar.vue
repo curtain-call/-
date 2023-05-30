@@ -45,14 +45,15 @@
 import { mapState } from 'pinia'
 import { useSidebar } from '../../stores/app'
 import { useSetting } from '../../stores/setting'
+import pinia from '../../stores/index'
 
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import Screenfull from '@/components/Screenfull'
-import Search from '@/components/HeaderSearch'
+import Breadcrumb from '@/components/Breadcrumb/index.vue'
+import Hamburger from '@/components/Hamburger/index.vue'
+import Screenfull from '@/components/Screenfull/index.vue'
+import Search from '@/components/HeaderSearch/index.vue'
 import defaultAvatar from '@/assets/images/default_avatar.png'
 
-const sidebar = useSidebar()
+const sidebar = useSidebar(pinia)
 
 export default {
   components: {

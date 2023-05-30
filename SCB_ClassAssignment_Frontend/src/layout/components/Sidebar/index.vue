@@ -26,18 +26,20 @@ import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 import variables from '@/styles/variables.scss'
 import { useSidebar } from '../../../stores/app'
+import { useSetting } from '../../../stores/setting'
 
 export default {
   name: 'sidebar',
   components: { SidebarItem, Logo },
   computed: {
-    ...mapGetters([
-      'permission_routes',
-      'sidebar'
-    ]),
+    // ...mapGetters([
+    //   'permission_routes',
+    //   'sidebar'
+    // ]),
     ...mapState(useSidebar, {
       sidebar: store => store.sidebar
     }),
+    // ...mapState(),
     // routes() {
     //   return this.$router.options.routes
     // },
@@ -51,7 +53,9 @@ export default {
       return path
     },
     showLogo() {
-      return this.$store.state.settings.sidebarLogo
+      const setting = useSetting()
+      return setting.sidebarLogo
+      // return this.$store.state.settings.sidebarLogo
     },
     variables() {
       return variables

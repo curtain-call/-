@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import BackToTop from '@/components/BackToTop'
+  import BackToTop from '@/components/BackToTop/index.vue'
 
   export default {
     name: 'AppMain',

@@ -13,7 +13,7 @@
 
 <script>
 import { Navbar, Sidebar, AppMain } from './components'
-import ResizeMixin from './mixin/ResizeHandler'
+// import ResizeMixin from './mixin/ResizeHandler'
 import { mapState, mapStores } from 'pinia'
 import { useSetting } from '../stores/setting'
 import { useSidebar } from '../stores/app'
@@ -27,7 +27,7 @@ export default {
     Sidebar,
     AppMain
   },
-  mixins: [ResizeMixin],
+  // mixins: [ResizeMixin],
   computed: {
     ...mapState(useSetting, {
       fixedHeader: store => store.fixedHeader
@@ -56,8 +56,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "~@/styles/mixin.scss";
-  @import "~@/styles/variables.scss";
+
+  @import '@/styles/mixin.scss';
+  @import '@/styles/variables.scss';
 
   .app-wrapper {
     @include clearfix;
