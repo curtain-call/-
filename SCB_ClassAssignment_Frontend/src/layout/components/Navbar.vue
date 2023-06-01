@@ -7,7 +7,7 @@
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         <el-tooltip content="搜索" effect="dark" placement="bottom">
-          <search id="header-search" class="right-menu-item"></search>
+          <!-- <search id="header-search" class="right-menu-item"></search> -->
         </el-tooltip>
         <el-tooltip content="全屏" effect="dark" placement="bottom">
           <screenfull id="screenfull" class="right-menu-item hover-effect"></screenfull>

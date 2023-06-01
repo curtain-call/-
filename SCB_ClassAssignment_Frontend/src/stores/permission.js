@@ -22,15 +22,15 @@ function hasPermission(roles, route) {
 export function filterAsyncRoutes(routes, roles) {
   const res = []
 
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
-    }
-  })
+  // routes.forEach(route => {
+  //   const tmp = { ...route }
+  //   if (hasPermission(roles, tmp)) {
+  //     if (tmp.children) {
+  //       tmp.children = filterAsyncRoutes(tmp.children, roles)
+  //     }
+  //     res.push(tmp)
+  //   }
+  // })
 
   return res
 }
@@ -44,7 +44,7 @@ export const usePermissions = defineStore('permission', {
   actions: {
     SET_ROUTES(routes) {
       this.addRoutes = routes
-      this.routes = constantRoutes.concat(routes)
+      this.routes = constantRoutes
     },
     generateRoutes(roles) {
       return new Promise(resolve => {

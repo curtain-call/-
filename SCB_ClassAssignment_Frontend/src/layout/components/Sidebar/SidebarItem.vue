@@ -3,7 +3,11 @@
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" />
+          <!-- <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" /> -->
+          <!-- <item :icon="'el-icon-board'" :title="onlyOneChild.meta.title" /> -->
+          <span style="font-size: 16px">
+          应该有提示,但组件还没写好
+          </span>
         </el-menu-item>
       </app-link>
     </template>
@@ -29,12 +33,12 @@ import path from 'path'
 import { isExternal } from '@/utils/validate'
 import Item from './Item.vue'
 import AppLink from './Link.vue'
-import FixiOSBug from './FixiOSBug'
+// import FixiOSBug from './FixiOSBug'
 
 export default {
   name: 'SidebarItem',
   components: { Item, AppLink },
-  mixins: [FixiOSBug],
+  // mixins: [FixiOSBug],
   props: {
     // route object
     item: {

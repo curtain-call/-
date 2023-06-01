@@ -24,8 +24,9 @@
     },
     data() {
       return {
-        title: '脑科学样本管理系统',
-        logo: require('@/assets/images/logo.png')
+        title: '智能简历解析系统',
+        // logo: require('@/assets/images/logo.png')
+        logo: new URL('@/assets/images/logo.png', import.meta.url)
       }
     }
   }

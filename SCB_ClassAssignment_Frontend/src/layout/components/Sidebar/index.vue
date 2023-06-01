@@ -1,6 +1,6 @@
 <template>
   <div :class="{'has-logo':showLogo}">
-    <logo v-if="showLogo" :collapse="isCollapse" />
+    <logo :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -13,7 +13,7 @@
         mode="vertical"
       >
       <!--  -->
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item v-for="route in this.permission_routes.routes" :key="route.path" :item="route" :base-path="route.path"  />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -21,12 +21,13 @@
 
 <script>
 // import { mapGetters } from 'vuex'
-import { mapState } from 'pinia'
+import { mapState, mapWritableState } from 'pinia'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 import variables from '@/styles/variables.scss'
 import { useSidebar } from '../../../stores/app'
 import { useSetting } from '../../../stores/setting'
+import { usePermissions } from '../../../stores/permission'
 
 export default {
   name: 'sidebar',
@@ -39,12 +40,15 @@ export default {
     ...mapState(useSidebar, {
       sidebar: store => store.sidebar
     }),
-    // ...mapState(),
+    ...mapState(usePermissions, {
+      permission_routes: 'routes'
+    }),
     // routes() {
     //   return this.$router.options.routes
     // },
     activeMenu() {
       const route = this.$route
+      console.log(this.permission_routes.routes)
       const { meta, path } = route
       // if set path, the sidebar will highlight the path you set
       if (meta.activeMenu) {

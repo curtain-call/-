@@ -62,20 +62,23 @@ export const useUser = defineStore('user', {
         },
 
         // get user info
-        getInfo({ commit, state }) {
+        getInfo() {
             return new Promise((resolve, reject) => {
+                console.log("getinfo")
                 getInfo().then(response => {
+                    console.log("getting info then")
                     if (!response) {
+                        console.log("no response")
                         return reject('验证失败，请重新登录')
                     }
                     // const { roles, username, userAvatar, userGender, email, school, lastLogin, interest, reputation } = response
-                    const { user_type, username, user_info } = response
-                    commit('SET_NAME', username)
-                    commit('SET_USERINFO', user_info)
-                    // commit('SET_AVATAR', userAvatar)
-                    // commit('SET_GENDER', userGender)
-                    // commit('SET_EMAIL', email)
-                    // commit('SET_LASTLOGIN', lastLogin)
+                    const { 'admin-token':{user_type, username, user_info} } = response.data
+                    console.log(response.data)
+                    console.log(user_info)
+                    // commit('SET_NAME', username)
+                    this.SET_NAME(username)
+                    this.SET_USERINFO(user_info)
+
                     let roles = []
                     if (user_type) {
                         roles = ['admin']
@@ -87,9 +90,13 @@ export const useUser = defineStore('user', {
                     roles = ['admin']
                     /**********************************/
 
-                    commit('SET_ROLES', roles)
+                    // commit('SET_ROLES', roles)
+                    this.SET_ROLES(roles)
+                    console.log(this.$state)
+
                     resolve(response)
                 }).catch(error => {
+                    console.log("failed getting info")
                     reject('验证失败，请重新登录')
                 })
             })

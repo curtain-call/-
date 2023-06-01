@@ -10,14 +10,15 @@ import { getToken } from '@/utils/auth'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: import.meta.env.VITE_APP_URL, // url = base url + request url
-  // withCredentials: true, // send cookies when cross-domain requests
+  baseURL: import.meta.env.VITE_APP_URL,
+  // baseURL: '192.168.159.1:5168/api'
+  
   // timeout: 5000 // 请求超时时间
 })
 
 // 跨域请求
 // 表示跨域请求时是否需要使用凭证
-axios.defaults.withCredentials = false
+axios.defaults.withCredentials = true
 // 允许跨域
 axios.defaults.headers.post['Access-Control-Allow-Origin-Type'] = '*'
 

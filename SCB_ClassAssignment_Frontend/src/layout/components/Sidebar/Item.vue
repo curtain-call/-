@@ -13,16 +13,16 @@ export default {
     }
   },
   render(h, context) {
-    const { icon, title } = context.props
+    const { title } = context.props
     const vnodes = []
 
-    if (icon) {
-      if (icon.includes('el-icon')) {
-        vnodes.push(<i style="font-size: 20px" class={[icon, 'sub-el-icon']} />)
-      } else {
-        vnodes.push(<svg-icon style="font-size: 20px" icon-class={icon}/>)
-      }
-    }
+    // if (icon) {
+    //   if (icon.includes('el-icon')) {
+    //     vnodes.push(<i style="font-size: 20px" class={[icon, 'sub-el-icon']} />)
+    //   } else {
+    //     vnodes.push(<svg-icon style="font-size: 20px" icon-class={icon}/>)
+    //   }
+    // }
 
     if (title) {
       vnodes.push(<span slot='title' style="font-size: 16px">{(title)}</span>)

@@ -2,8 +2,10 @@ import router from './router/index'
 
 
 // 用到哪个store, 待修改, pinia只能特化引入
-import store from './store'
-
+// import store from './store'
+import pinia from './stores/index'
+import { usePermissions } from './stores/permission'
+import { useUser } from './stores/user'
 
 // import { Message } from 'element-ui'
 import { ElMessage } from 'element-plus'
@@ -21,12 +23,19 @@ const whiteList = ['/login', '/register', '/forget-password'] // 无需重定向
 router.beforeEach(async(to, from, next) => {
   // 进度条开始
   NProgress.start()
+  
+  // 获取store实例
+  const user = useUser(pinia)
+  const permissions = usePermissions(pinia)
 
+  console.log("导航守卫做了拦截")
+  
   // 设置页面标题
   document.title = getPageTitle(to.meta.title)
 
   // 判断用户是否已登录
   const hasToken = getToken()
+  console.log("hasToken = "+hasToken)
 
   if (hasToken) {
     if (to.path === '/login') {
@@ -35,15 +44,20 @@ router.beforeEach(async(to, from, next) => {
       NProgress.done()
     } else {
       // 判断用户是否已获取用户信息
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      console.log("hasRoles: " + store.getters.roles )
+      const hasRoles = user.roles && user.roles.length > 0 
+      console.log("hasRoles: " + user.roles )
       if (hasRoles) {
         next()
       } else {
         try {
           // 获取用户信息
           // note: roles must be an object array! such as: ['admin'] or ,['developer','editor']
-          const { user_type } = await store.dispatch('user/getInfo')
+          console.log("执行到getuserinfo")
+
+          // 又忘了异步了,笑拉了
+          const { user_type } = await user.getInfo()
+          console.log("这里是" + user_type)
+
           let roles = []
           if (user_type) {
             roles = ['admin']
@@ -54,17 +68,18 @@ router.beforeEach(async(to, from, next) => {
           // roles = ['admin']
           /**********************************/
           // 基于角色生成可访问的路由表
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          // const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          const accessRoutes = permissions.generateRoutes(roles)
 
           // 动态添加可访问路由表
-          router.addRoutes(accessRoutes)
+          router.addRoute(accessRoutes)
 
           // hack方法，确保addRoutes已完成
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (error) {
           // 移除token并跳转至登录界面
-          await store.dispatch('user/resetToken')
+          await user.resetToken()
           ElMessage.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
           NProgress.done()

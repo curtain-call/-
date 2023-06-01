@@ -55,7 +55,7 @@ export const constantRoutes = {
       redirect: '/resume-parser',
       component: Layout,
       children: [{
-        path: '/resume-parser/:id([a-z0-9-]+)',
+        path: '/resume-parser',
         component: () => import('../views/ResumeParser/index.vue'),
         name: 'parser-details',
         meta: { title: '简历解析', icon: 'el-icon-document' }
@@ -69,7 +69,8 @@ export const constantRoutes = {
       children: [{
         path: '/job-info',
         name: 'job--info-details',
-        component: () => import('../views/Jobinfo/index.vue')
+        component: () => import('../views/Jobinfo/index.vue'),
+        meta: { title: '人岗匹配', icon: 'el-icon-document' }
       }]
     }
     // 错误路由重定向

@@ -20,6 +20,7 @@ export default {
     },
     type() {
       if (this.isExternal) {
+        // 这里改动让它总是a
         return 'a'
       }
       return 'router-link'
