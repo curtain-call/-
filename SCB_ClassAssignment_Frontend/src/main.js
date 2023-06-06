@@ -4,6 +4,8 @@ import pinia from './stores'
 import App from './Welcome.vue'
 import router from './router'
 
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
@@ -13,6 +15,7 @@ import '@/styles/index.scss' // global css
 import axios from 'axios'
 import '@/permission' // permission control
 
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 const app = createApp(App)
 
 // app.use(createPinia())
@@ -21,6 +24,10 @@ app.use(ElementPlus)
 app.use(router)
 
 app.mount('#app')
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+  }
 
 // while(true){
 //     console.log("sending request")

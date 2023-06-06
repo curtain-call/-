@@ -49,7 +49,7 @@ Mock.mock('http://127.0.0.1:8392/Login/Login', 'post', () => {
   }
 })
 
-Mock.mock('http://127.0.0.1:8392/getUserInfo', 'post', () => {
+Mock.mock('http://127.0.0.1:8392/Login/GetInfo', 'post', () => {
   const username = 'admin'
   const token = tokens[username]
   const info = {
@@ -80,4 +80,12 @@ Mock.mock('http://127.0.0.1:8392/getUserInfo', 'post', () => {
     code: 20000,
     data: info
   }
+})
+
+Mock.mock('http://127.0.0.1:8392/uploadFile', 'post', (options)=>{
+  console.log(options.body)
+    return {
+      code: 20000,
+      data: 'Fine, a file is here.'
+    }
 })

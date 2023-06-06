@@ -58,7 +58,7 @@ export const constantRoutes = {
         path: '/resume-parser',
         component: () => import('../views/ResumeParser/index.vue'),
         name: 'parser-details',
-        meta: { title: '简历解析', icon: 'el-icon-document' }
+        meta: { title: '简历详情', icon: 'el-icon-document' }
       }]
     },
     {

@@ -18,7 +18,7 @@ export function login(data) {
   
   export function getInfo(data) {
     return request({
-      url: '/getUserInfo',
+      url: '/Login/GetInfo',
       method: 'post',
       data
     })

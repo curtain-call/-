@@ -10,7 +10,8 @@ const getDefaultState = () => {
         token: getToken(),
         name: '',
         userInfo: '',
-        roles: []
+        roles: [],
+        userId: ''
     }
 }
 
@@ -38,6 +39,9 @@ export const useUser = defineStore('user', {
         SET_ROLES(roles) {
             this.roles = roles
         },
+        set_userid(userId){
+            this.userId = userId
+        },
         login(userInfo) {
             const { username, password } = userInfo
             return new Promise((resolve, reject) => {
@@ -46,9 +50,11 @@ export const useUser = defineStore('user', {
                 .then(response => {
                     console.log("这里是stores/user.js")
                     console.log(response)
-                    const { token } = response.data
+                    const { token, userId } = response.data
                     console.log(token)
                     this.SET_TOKEN(token)
+                    this.set_userid(userId)
+                    console.log(this.userId)
                     // commit('SET_TOKEN', token)
                     setToken(token)
                     resolve()
@@ -67,6 +73,7 @@ export const useUser = defineStore('user', {
                 console.log("getinfo")
                 getInfo().then(response => {
                     console.log("getting info then")
+                    console.log(response)
                     if (!response) {
                         console.log("no response")
                         return reject('验证失败，请重新登录')

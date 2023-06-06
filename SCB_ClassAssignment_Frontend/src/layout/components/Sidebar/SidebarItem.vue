@@ -4,10 +4,10 @@
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
           <!-- <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" /> -->
-          <!-- <item :icon="'el-icon-board'" :title="onlyOneChild.meta.title" /> -->
-          <span style="font-size: 16px">
+          <item :icon="'el-icon-board'" :title="onlyOneChild.meta.title" />
+          <!-- <span style="font-size: 16px">
           应该有提示,但组件还没写好
-          </span>
+          </span> -->
         </el-menu-item>
       </app-link>
     </template>
@@ -95,3 +95,10 @@ export default {
   }
 }
 </script>
+
+<style>
+  .el-menu{
+    background-color: #304156;
+    
+  }
+</style>

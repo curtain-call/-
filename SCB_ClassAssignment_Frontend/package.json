@@ -10,10 +10,12 @@
   "dependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "axios": "^1.4.0",
+    "docx-preview": "^0.1.15",
     "element-plus": "^2.3.4",
     "fuse.js": "^6.6.2",
     "js-cookie": "^3.0.5",
     "mockjs": "^1.1.0",
+    "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.2.1",
     "pinia": "^2.0.32",

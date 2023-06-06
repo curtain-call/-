@@ -24,7 +24,8 @@
 import { mapState, mapWritableState } from 'pinia'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
-import variables from '@/styles/variables.scss'
+
+import variables from '@/styles/variables.scss?inline'
 import { useSidebar } from '../../../stores/app'
 import { useSetting } from '../../../stores/setting'
 import { usePermissions } from '../../../stores/permission'
@@ -70,3 +71,10 @@ export default {
   }
 }
 </script>
+
+<style>
+  .el-menu{
+    background-color: #304156;
+    
+  }
+</style>

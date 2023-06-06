@@ -25,6 +25,7 @@ axios.defaults.headers.post['Access-Control-Allow-Origin-Type'] = '*'
 // 请求拦截器
 service.interceptors.request.use(
   config => {
+    console.log(config)
     const userStore = useUser(pinia)
     console.log("这是rquest.js请求拦截器")
     console.log("这是token" + userStore.token)
