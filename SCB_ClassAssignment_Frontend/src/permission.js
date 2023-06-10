@@ -45,7 +45,8 @@ router.beforeEach(async(to, from, next) => {
     } else {
       // 判断用户是否已获取用户信息
       const hasRoles = user.roles && user.roles.length > 0 
-      console.log("hasRoles: " + user.roles )
+      console.log(hasRoles)
+
       if (hasRoles) {
         next()
       } else {

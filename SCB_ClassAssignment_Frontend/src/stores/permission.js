@@ -62,6 +62,7 @@ export const usePermissions = defineStore('permission', {
         resolve(accessedRoutes)
       })
     }
-  }
+  },
+  persist: true
 })
 

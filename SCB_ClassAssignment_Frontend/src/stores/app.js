@@ -44,8 +44,8 @@ export const useSidebar = defineStore(
                 // commit('TOGGLE_DEVICE', device)
                 this.TOGGLE_DEVICE(device)
             }
-        }
-    }
+        },
+    },
 )
 
 

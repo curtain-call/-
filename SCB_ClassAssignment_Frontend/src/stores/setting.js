@@ -19,5 +19,5 @@ export const useSetting = defineStore('setting', {
         changeSetting(data) {
             this.CHANGE_SETTING(data)
         }
-    }
+    },
 })

@@ -1,16 +1,19 @@
+
 import { defineStore } from "pinia";
 import { getAllResumeParser } from "../api/resume";
 
 export const useResumeDetail = defineStore('ResumeDetails', {
     state: () => ({
-        Resumedetail: []
+        Resumedetail: {},
+        ResumeList: [],
+        file: {}
     }),
     actions: {
         pushResume(info) {
-            this.Resumedetail.push(info)
+            this.ResumeList.push(info)
         },
         delete(info) {
-            this.Resumedetail = this.Resumedetail.filter(item => {
+            this.ResumeList = this.ResumeList.filter(item => {
                 item.name === info
             })
         },
@@ -19,7 +22,7 @@ export const useResumeDetail = defineStore('ResumeDetails', {
                 getAllResumeParser(info)
                     .then((response) => {
                         // 把响应的数据更新到state里
-                        this.Resumedetail = response.data
+                        this.ResumeList = response.simpleResumes
                         resolve()
                     })
                     .catch(error => {
@@ -27,6 +30,10 @@ export const useResumeDetail = defineStore('ResumeDetails', {
                     })
             })
 
+        },
+        set_file(data){
+            this.file = data
         }
-    }
+    },
+    persist:true
 })

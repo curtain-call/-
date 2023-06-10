@@ -50,7 +50,8 @@ export const useUser = defineStore('user', {
                 .then(response => {
                     console.log("这里是stores/user.js")
                     console.log(response)
-                    const { token, userId } = response.data
+                    const token = response.data
+                    const userId = response.userId
                     console.log(token)
                     this.SET_TOKEN(token)
                     this.set_userid(userId)
@@ -79,7 +80,8 @@ export const useUser = defineStore('user', {
                         return reject('验证失败，请重新登录')
                     }
                     // const { roles, username, userAvatar, userGender, email, school, lastLogin, interest, reputation } = response
-                    const { 'admin-token':{user_type, username, user_info} } = response.data
+                    // const { admin_token:{user_type, username, user_info} } = response.data
+                    const { user_type, username, user_info } = response.data
                     console.log(response.data)
                     console.log(user_info)
                     // commit('SET_NAME', username)
@@ -126,5 +128,7 @@ export const useUser = defineStore('user', {
                 resolve()
             })
         }
-    }
-})
+    },
+    persist: true
+}
+)

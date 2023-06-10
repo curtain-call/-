@@ -49,12 +49,12 @@ service.interceptors.response.use(
     const userStore = useUser(pinia)
     // 标识
     console.log("这是request.js响应拦截器")
+    console.log(response)
+
     // 获取返回数据
     const res = response.data
-    // 返回状态码
-    console.log("res.code: "+res.code)
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (response.status !== 200) {
       // 下载文件
       if (response.headers['content-type'] === 'application/octet-stream') {
         return response

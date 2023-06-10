@@ -82,10 +82,37 @@ Mock.mock('http://127.0.0.1:8392/Login/GetInfo', 'post', () => {
   }
 })
 
-Mock.mock('http://127.0.0.1:8392/uploadFile', 'post', (options)=>{
+Mock.mock('http://localhost:5168/api/ResumeView/UploadResume?userId=2', 'post', (options)=>{
   console.log(options.body)
     return {
       code: 20000,
       data: 'Fine, a file is here.'
     }
+})
+
+Mock.mock('http://127.0.0.1:8392/Resumes/Allresumes', 'post', (options)=>{
+  console.log("这是获取所有简历信息",options.body)
+  return{
+    code: 20000,
+    "simpleResumes": [
+      {
+        "name": '毛子昊',
+        "age": 21,
+        "phoneNumber": "1855615",
+        "jobIntention": 'Java 后端工程师',
+        "gender": '男',
+        "matchingScore": 80,
+        "education": '本科'
+      },
+      {
+        "name": '牛锴鹏',
+        "age": 20,
+        "phoneNumber": "1145141919",
+        "jobIntention": 'Java 后端工程师',
+        "gender": '男',
+        "matChingScore": 90,
+        "education": '本科'
+      },
+    ]
+  }
 })

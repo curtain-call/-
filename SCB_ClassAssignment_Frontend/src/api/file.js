@@ -10,12 +10,12 @@ export function getFile(data){
 }
 export function uploadFile(data, userId){
     return request({
-        url: '/Resumes/UploadResume',
+        url: '/ResumeView/UploadResume',
         method: 'post',
         headers: {
             "Content-type": "multipart/form-data"
         },
-        // params:{ userId },
+        params:{ userId },
         data
     })
 }

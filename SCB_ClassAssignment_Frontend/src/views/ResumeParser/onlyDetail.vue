@@ -1,7 +1,6 @@
 <template>
     <ElRow>
-        这是忘记密码的页面
-        哈哈, 
+        这是应该是个弹窗, 是只有简历的详细信息页面
     </ElRow>
 </template>
 <script setup>

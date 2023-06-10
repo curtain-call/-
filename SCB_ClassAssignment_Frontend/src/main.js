@@ -9,7 +9,9 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-import '../mock/index'
+
+import '../node_modules/pubsub-js/src/pubsub'
+// import '../mock/index'
 import './styles/element-variables.scss'
 import '@/styles/index.scss' // global css
 import axios from 'axios'
